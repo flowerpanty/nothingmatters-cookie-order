@@ -139,12 +139,13 @@
 /* User Request: Floating Banner (Order) - Positioned above Consult */
 #nm-app-root .nm-floating-order {
     position: fixed;
-    bottom: 125px;
-    /* 5px + 110px + 10px gap */
+    bottom: 95px;
+    /* Overlap to minimize visual gap */
     right: 5px;
     z-index: 9999;
-    width: 110px;
-    height: 110px;
+    width: 135px;
+    /* Increased size */
+    height: 135px;
     cursor: pointer;
     transition: transform 0.2s ease;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
