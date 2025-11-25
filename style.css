@@ -18,7 +18,8 @@
     line-height: 1.55 !important;
     color: #1D1D1F;
     background-color: #F5F5F7;
-    max-width: 640px;
+    max-width: 100%;
+    /* User Request: Minimize margins (Full Width) */
     margin: 0 auto;
     padding-bottom: 100px;
     position: relative;
@@ -33,6 +34,15 @@
 #nm-app-root * {
     box-sizing: border-box;
     font-family: var(--font-main) !important;
+}
+
+/* 3. Gallery Grid (Dessert & Product) */
+#nm-app-root .nm-gallery-grid {
+    display: grid;
+    /* Responsive Grid: Auto-fill with min-width */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
 }
 
 /* 🎄 Ribbon Banner */
