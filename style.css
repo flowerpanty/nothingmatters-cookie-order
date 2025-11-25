@@ -113,12 +113,13 @@
 /* User Request: Floating Banner */
 #nm-app-root .nm-floating-banner {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 20px;
+    right: 10px;
+    /* Closer to the right */
     z-index: 9999;
-    width: 64px;
-    /* Appropriate size */
-    height: 64px;
+    width: 110px;
+    /* Much bigger */
+    height: 110px;
     cursor: pointer;
     transition: transform 0.2s ease;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
