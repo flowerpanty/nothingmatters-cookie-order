@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (sourceType === 'wp') {
                 // Fetch from WordPress Standard API (Categories)
-                const response = await fetch(`${WP_API_BASE}&categories=${id}`);
+                const response = await fetch(`${WP_API_BASE}&categories=${id}&_=${new Date().getTime()}`);
                 const data = await response.json();
 
                 posts = data.map(post => ({
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }));
             } else if (sourceType === 'kboard') {
                 // Fetch from Custom KBoard API
-                const response = await fetch(`${KBOARD_API_BASE}/${id}`);
+                const response = await fetch(`${KBOARD_API_BASE}/${id}?_=${new Date().getTime()}`);
                 const data = await response.json();
 
                 if (data && Array.isArray(data)) {
