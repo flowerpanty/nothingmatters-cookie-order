@@ -93,14 +93,45 @@
 
 /* 💊 Filter Pills (Minimal Line Style) */
 #nm-app-root .nm-filter-row-sticky {
-    position: sticky;
-    top: 0;
+    position: relative;
+    /* User Request: Remove sticky */
     z-index: 100;
-    background: rgba(245, 245, 247, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: transparent;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* User Request: Boldest Font */
+.nm-extra-bold {
+    font-family: 'Pretendard', sans-serif !important;
+    font-weight: 900 !important;
+    /* Black/Heavy */
+}
+
+/* User Request: Floating Banner */
+#nm-app-root .nm-floating-banner {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    width: 64px;
+    /* Appropriate size */
+    height: 64px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+#nm-app-root .nm-floating-banner:hover {
+    transform: scale(1.05);
+}
+
+#nm-app-root .nm-floating-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 #nm-app-root .nm-filter-row {
