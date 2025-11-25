@@ -120,7 +120,7 @@
     /* Black/Heavy */
 }
 
-/* User Request: Floating Banner */
+/* User Request: Floating Banner (Consultation) */
 #nm-app-root .nm-floating-banner {
     position: fixed;
     bottom: 5px;
@@ -136,11 +136,27 @@
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
-#nm-app-root .nm-floating-banner:hover {
+/* User Request: Floating Banner (Order) - Positioned above Consult */
+#nm-app-root .nm-floating-order {
+    position: fixed;
+    bottom: 125px;
+    /* 5px + 110px + 10px gap */
+    right: 5px;
+    z-index: 9999;
+    width: 110px;
+    height: 110px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+#nm-app-root .nm-floating-banner:hover,
+#nm-app-root .nm-floating-order:hover {
     transform: scale(1.05);
 }
 
-#nm-app-root .nm-floating-banner img {
+#nm-app-root .nm-floating-banner img,
+#nm-app-root .nm-floating-order img {
     width: 100%;
     height: 100%;
     object-fit: contain;
