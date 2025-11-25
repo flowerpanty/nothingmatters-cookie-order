@@ -139,9 +139,10 @@
 /* User Request: Floating Banner (Order) - Positioned above Consult */
 #nm-app-root .nm-floating-order {
     position: fixed;
-    bottom: 95px;
-    /* Overlap to minimize visual gap */
-    right: 5px;
+    bottom: 55px;
+    /* Deep overlap to close visual gap */
+    right: -8px;
+    /* Center align with the banner below */
     z-index: 9999;
     width: 135px;
     /* Increased size */
