@@ -720,6 +720,123 @@
     margin-left: 16px;
 }
 
+/* 🎄 Christmas CTA Button */
+#nm-app-root .nm-christmas-cta-btn {
+    display: block;
+    position: relative;
+    border-radius: 24px;
+    padding: 0;
+    margin-bottom: 10px;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
+    transition: all 0.3s ease;
+}
+
+#nm-app-root .nm-christmas-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #DC2626 0%, #16A34A 100%);
+    opacity: 1;
+    z-index: 0;
+}
+
+#nm-app-root .nm-christmas-cta-btn::before {
+    content: '❄️';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 1.5rem;
+    opacity: 0.3;
+    animation: snow-fall 3s infinite ease-in-out;
+    z-index: 1;
+}
+
+#nm-app-root .nm-christmas-cta-btn::after {
+    content: '⭐';
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    font-size: 1.2rem;
+    opacity: 0.4;
+    animation: twinkle 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+@keyframes snow-fall {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+    }
+}
+
+#nm-app-root .nm-christmas-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px;
+}
+
+#nm-app-root .nm-christmas-emoji {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+#nm-app-root .nm-christmas-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+#nm-app-root .nm-christmas-main {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#nm-app-root .nm-christmas-sub {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#nm-app-root .nm-christmas-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(220, 38, 38, 0.35);
+}
+
+#nm-app-root .nm-christmas-cta-btn:hover .nm-christmas-bg {
+    opacity: 0.95;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 400px) {
     #nm-app-root .nm-mid-cta-btn {
@@ -731,6 +848,23 @@
     }
 
     #nm-app-root .nm-mid-cta-sub {
+        font-size: 0.85rem;
+    }
+
+    #nm-app-root .nm-christmas-content {
+        padding: 20px;
+        gap: 12px;
+    }
+
+    #nm-app-root .nm-christmas-emoji {
+        font-size: 1.6rem;
+    }
+
+    #nm-app-root .nm-christmas-main {
+        font-size: 1rem;
+    }
+
+    #nm-app-root .nm-christmas-sub {
         font-size: 0.85rem;
     }
 }
