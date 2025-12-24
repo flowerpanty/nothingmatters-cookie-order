@@ -196,4 +196,144 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Product: KBoard ID 8
     fetchAndRender('kboard', 8, '#section-product .nm-gallery-grid', 'grid');
 
+    // 5. YouTube Shorts Loading
+    loadYouTubeShorts();
+
 });
+
+// YouTube Shorts Dynamic Loading
+async function loadYouTubeShorts() {
+    // ⚠️ TODO: YouTube API 키를 여기에 입력하세요
+    // Google Cloud Console에서 발급: https://console.cloud.google.com/
+    // YouTube Data API v3 활성화 후 API 키 생성
+    // HTTP Referrer 제한 설정 권장 (예: *.nothingmatters.co.kr/*)
+    const YOUTUBE_API_KEY = ''; // 여기에 API 키를 입력하세요
+    const CHANNEL_ID = 'UCYgL27Slvlb_C4Bw2P65CCA'; // bettermatters 채널 ID
+    const MAX_RESULTS = 2;
+    const CACHE_KEY = 'youtube_shorts_cache';
+    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간 (밀리초)
+
+    const container = document.getElementById('shorts-container');
+    if (!container) return;
+
+    // 캐시 확인
+    const cachedData = getCachedShorts();
+    if (cachedData && cachedData.videos && cachedData.videos.length > 0) {
+        console.log('Using cached YouTube Shorts data');
+        renderShorts(cachedData.videos);
+        return;
+    }
+
+    // API 키가 없으면 폴백 (하드코딩된 기본값 사용)
+    if (!YOUTUBE_API_KEY) {
+        console.warn('YouTube API key not configured. Using fallback videos.');
+        const fallbackVideos = [
+            { id: 'HLGpVBgF_A4', title: '회사 연말 선물추천 웨딩 기업 답례품' },
+            { id: 'XbEMmoLOHgI', title: '크리스마스 쿠키 선물세트 추천 nothingmatters' }
+        ];
+        renderShorts(fallbackVideos);
+        return;
+    }
+
+    // YouTube Data API 호출
+    try {
+        // 로딩 표시
+        container.innerHTML = '<div class="nm-loading" style="text-align: center; padding: 20px; color: #666;">쇼츠 로딩 중...</div>';
+
+        // API 엔드포인트: 채널의 최신 쇼츠 검색
+        const apiUrl = `https://www.googleapis.com/youtube/v3/search?` +
+            `part=snippet&channelId=${CHANNEL_ID}&maxResults=${MAX_RESULTS}` +
+            `&order=date&type=video&videoDuration=short&key=${YOUTUBE_API_KEY}`;
+
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            throw new Error(`YouTube API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.items && data.items.length > 0) {
+            const videos = data.items.map(item => ({
+                id: item.id.videoId,
+                title: item.snippet.title
+            }));
+
+            // 캐시에 저장
+            cacheShorts(videos);
+
+            // 렌더링
+            renderShorts(videos);
+        } else {
+            throw new Error('No shorts found');
+        }
+    } catch (error) {
+        console.error('Failed to load YouTube Shorts:', error);
+
+        // 에러 시 폴백
+        const fallbackVideos = [
+            { id: 'HLGpVBgF_A4', title: '회사 연말 선물추천 웨딩 기업 답례품' },
+            { id: 'XbEMmoLOHgI', title: '크리스마스 쿠키 선물세트 추천 nothingmatters' }
+        ];
+        renderShorts(fallbackVideos);
+    }
+}
+
+// 쇼츠 렌더링
+function renderShorts(videos) {
+    const container = document.getElementById('shorts-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    videos.forEach(video => {
+        const shortItem = document.createElement('div');
+        shortItem.className = 'nm-shorts-item';
+        shortItem.innerHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/${video.id}" 
+                title="${video.title}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+        `;
+        container.appendChild(shortItem);
+    });
+}
+
+// 캐시에서 쇼츠 가져오기
+function getCachedShorts() {
+    try {
+        const cached = localStorage.getItem('youtube_shorts_cache');
+        if (!cached) return null;
+
+        const data = JSON.parse(cached);
+        const now = new Date().getTime();
+        const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간
+
+        // 캐시가 유효한지 확인
+        if (data.timestamp && (now - data.timestamp) < CACHE_DURATION) {
+            return data;
+        }
+
+        // 만료된 캐시 삭제
+        localStorage.removeItem('youtube_shorts_cache');
+        return null;
+    } catch (error) {
+        console.error('Error reading cache:', error);
+        return null;
+    }
+}
+
+// 캐시에 쇼츠 저장
+function cacheShorts(videos) {
+    try {
+        const cacheData = {
+            videos: videos,
+            timestamp: new Date().getTime()
+        };
+        localStorage.setItem('youtube_shorts_cache', JSON.stringify(cacheData));
+    } catch (error) {
+        console.error('Error saving to cache:', error);
+    }
+}
