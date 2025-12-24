@@ -207,7 +207,7 @@ async function loadYouTubeShorts() {
     // Google Cloud Console에서 발급: https://console.cloud.google.com/
     // YouTube Data API v3 활성화 후 API 키 생성
     // HTTP Referrer 제한 설정 권장 (예: *.nothingmatters.co.kr/*)
-    const YOUTUBE_API_KEY = ''; // 여기에 API 키를 입력하세요
+    const YOUTUBE_API_KEY = 'AIzaSyAeTdocfE9dQcRPZ03QdZ48Hf53JC2c18o'; // YouTube API 키
     const CHANNEL_ID = 'UCYgL27Slvlb_C4Bw2P65CCA'; // bettermatters 채널 ID
     const MAX_RESULTS = 2;
     const CACHE_KEY = 'youtube_shorts_cache';
