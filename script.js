@@ -208,7 +208,7 @@ async function loadYouTubeShorts() {
     // YouTube Data API v3 활성화 후 API 키 생성
     // HTTP Referrer 제한 설정 권장 (예: *.nothingmatters.co.kr/*)
     const YOUTUBE_API_KEY = 'AIzaSyAeTdocfE9dQcRPZ03QdZ48Hf53JC2c18o'; // YouTube API 키
-    const CHANNEL_ID = 'UCYgL27Slvlb_C4Bw2P65CCA'; // bettermatters 채널 ID
+    const CHANNEL_ID = 'UC2Wtgd70UrGZ3ousmrHL-Qg'; // bettermatters 채널 ID
     const MAX_RESULTS = 2;
     const CACHE_KEY = 'youtube_shorts_cache';
     const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간 (밀리초)
