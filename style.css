@@ -868,3 +868,48 @@
         font-size: 0.85rem;
     }
 }
+
+/* 📱 YouTube Shorts Section */
+#nm-app-root .nm-shorts-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#nm-app-root .nm-shorts-item {
+    flex: 0 0 calc(50% - 8px);
+    max-width: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #000;
+}
+
+#nm-app-root .nm-shorts-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+#nm-app-root .nm-shorts-item iframe {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border: none;
+    display: block;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 600px) {
+    #nm-app-root .nm-shorts-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #nm-app-root .nm-shorts-item {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 320px;
+    }
+}
