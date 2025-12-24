@@ -299,6 +299,110 @@ function renderShorts(videos) {
         `;
         container.appendChild(shortItem);
     });
+
+    // 슬라이더 초기화
+    initShortsSlider(videos.length);
+}
+
+// 슬라이더 초기화 및 컨트롤
+function initShortsSlider(totalItems) {
+    if (totalItems <= 1) return; // 1개면 슬라이더 불필요
+
+    const container = document.getElementById('shorts-container');
+    const prevBtn = document.getElementById('shorts-prev');
+    const nextBtn = document.getElementById('shorts-next');
+    const dotsContainer = document.getElementById('shorts-dots');
+
+    if (!container || !prevBtn || !nextBtn || !dotsContainer) return;
+
+    let currentIndex = 0;
+
+    // 인디케이터 dots 생성
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalItems; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'nm-shorts-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+
+    const dots = dotsContainer.querySelectorAll('.nm-shorts-dot');
+
+    // 슬라이드로 이동
+    function goToSlide(index) {
+        const items = container.querySelectorAll('.nm-shorts-item');
+        if (index < 0 || index >= items.length) return;
+
+        currentIndex = index;
+
+        // 스크롤로 이동
+        items[index].scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+        });
+
+        // 버튼 상태 업데이트
+        updateButtons();
+
+        // Dots 활성화
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    // 버튼 상태 업데이트
+    function updateButtons() {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === totalItems - 1;
+    }
+
+    // 버튼 이벤트
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            goToSlide(currentIndex - 1);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < totalItems - 1) {
+            goToSlide(currentIndex + 1);
+        }
+    });
+
+    // 스크롤 이벤트로 현재 인덱스 감지
+    let scrollTimeout;
+    container.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const items = container.querySelectorAll('.nm-shorts-item');
+            let closestIndex = 0;
+            let minDistance = Infinity;
+
+            items.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const distance = Math.abs(rect.left - containerRect.left);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            if (closestIndex !== currentIndex) {
+                currentIndex = closestIndex;
+                updateButtons();
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+        }, 100);
+    });
+
+    // 초기 상태
+    updateButtons();
 }
 
 // 캐시에서 쇼츠 가져오기

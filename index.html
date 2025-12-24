@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=1735053000">
+    <link rel="stylesheet" href="style.css?v=1735054000">
 </head>
 
 
@@ -142,9 +142,25 @@
                         nothingmatters의 일상을 짧은 영상으로 만나보세요.
                     </span>
                 </p>
-                <div class="nm-shorts-container" id="shorts-container">
-                    <!-- 쇼츠가 JavaScript로 동적으로 로드됩니다 -->
-                    <div style="text-align: center; padding: 20px; color: #666;">쇼츠 로딩 중...</div>
+                <div class="nm-shorts-wrapper">
+                    <!-- 좌우 네비게이션 버튼 -->
+                    <div class="nm-shorts-nav">
+                        <button class="nm-shorts-nav-btn nm-shorts-nav-prev" id="shorts-prev" aria-label="이전 쇼츠">
+                            ◀
+                        </button>
+                        <button class="nm-shorts-nav-btn nm-shorts-nav-next" id="shorts-next" aria-label="다음 쇼츠">
+                            ▶
+                        </button>
+                    </div>
+
+                    <!-- 쇼츠 컨테이너 -->
+                    <div class="nm-shorts-container" id="shorts-container">
+                        <!-- 쇼츠가 JavaScript로 동적으로 로드됩니다 -->
+                        <div style="text-align: center; padding: 20px; color: #666;">쇼츠 로딩 중...</div>
+                    </div>
+
+                    <!-- 페이지 인디케이터 -->
+                    <div class="nm-shorts-dots" id="shorts-dots"></div>
                 </div>
                 <div class="nm-gallery-footer">
                     <a href="https://www.youtube.com/@bettermatters/shorts" target="_blank"
@@ -245,7 +261,7 @@
         </div>
     </div>
 
-    <script src="script.js?v=1735053600"></script>
+    <script src="script.js?v=1735054000"></script>
 </body>
 
 </html>
