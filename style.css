@@ -974,6 +974,13 @@
 
 /* Mobile: 슬라이더 형식 */
 @media (max-width: 600px) {
+    #nm-app-root .nm-shorts-wrapper {
+        overflow: hidden;
+        /* 다음 슬라이드가 보이지 않도록 */
+        padding: 0 20px;
+        /* 좌우 여백 */
+    }
+
     #nm-app-root .nm-shorts-container {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -982,7 +989,10 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         /* Firefox */
-        gap: 0;
+        gap: 16px;
+        /* 아이템 간격 */
+        padding: 0;
+        /* 컨테이너 패딩 제거 */
     }
 
     #nm-app-root .nm-shorts-container::-webkit-scrollbar {
@@ -991,10 +1001,12 @@
     }
 
     #nm-app-root .nm-shorts-item {
-        flex: 0 0 100%;
-        width: 100%;
+        flex: 0 0 calc(100% - 40px);
+        /* wrapper 패딩 고려 */
+        width: calc(100% - 40px);
         max-width: 100%;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
+        /* start로 변경하여 정확한 정렬 */
     }
 
     /* 모바일에서 네비게이션 버튼 표시 */
