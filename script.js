@@ -291,7 +291,7 @@ function renderShorts(videos) {
         shortItem.className = 'nm-shorts-item';
         shortItem.innerHTML = `
             <iframe 
-                src="https://www.youtube.com/embed/${video.id}" 
+                src="https://www.youtube.com/embed/${video.id}?autoplay=0&mute=0&controls=1&modestbranding=1&rel=0" 
                 title="${video.title}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen>
