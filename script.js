@@ -196,7 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Product: KBoard ID 8
     fetchAndRender('kboard', 8, '#section-product .nm-gallery-grid', 'grid');
 
-    // 5. YouTube Shorts Loading
+    // 5. Instagram Feed Loading
+    loadInstagramFeed();
+
+    // 6. YouTube Shorts Loading
     loadYouTubeShorts();
 
 });
