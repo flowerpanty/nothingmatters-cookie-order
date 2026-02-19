@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Instagram Feed Loading
 async function loadInstagramFeed() {
     const INSTAGRAM_ACCESS_TOKEN = ''; // Instagram API 토큰 (없으면 폴백)
-    const INSTAGRAM_USERNAME = 'nothingmatters.kr';
+    const INSTAGRAM_USERNAME = 'nothingnothingn0thing';
     const MAX_RESULTS = 4; // 2x2 그리드
     const CACHE_KEY = 'instagram_feed_cache';
     const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간
@@ -308,7 +308,7 @@ function renderInstagramFallback() {
     if (!grid) return;
 
     grid.innerHTML = `
-        <a href="https://www.instagram.com/nothingmatters.kr/" target="_blank" rel="noopener noreferrer" 
+        <a href="https://www.instagram.com/nothingnothingn0thing/" target="_blank" rel="noopener noreferrer" 
            style="display: flex; align-items: center; gap: 16px; padding: 24px; 
                   background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); 
                   border-radius: 16px; text-decoration: none; color: inherit;
@@ -317,7 +317,7 @@ function renderInstagramFallback() {
            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
             <div style="font-size: 2.5em;">📷</div>
             <div>
-                <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 4px;">@nothingmatters.kr</div>
+                <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 4px;">@nothingnothingn0thing</div>
                 <div style="font-size: 0.85em; color: #888; line-height: 1.4;">인스타그램에서 최신 소식을 만나보세요</div>
             </div>
         </a>
