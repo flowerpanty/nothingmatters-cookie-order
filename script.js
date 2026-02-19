@@ -197,12 +197,132 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndRender('kboard', 8, '#section-product .nm-gallery-grid', 'grid');
 
     // 5. Instagram Feed Loading
-    loadInstagramFeed();
+    try { loadInstagramFeed(); } catch (e) { console.error('Instagram load error:', e); }
 
     // 6. YouTube Shorts Loading
-    loadYouTubeShorts();
+    try { loadYouTubeShorts(); } catch (e) { console.error('YouTube Shorts load error:', e); }
 
 });
+
+// Instagram Feed Loading
+async function loadInstagramFeed() {
+    const INSTAGRAM_ACCESS_TOKEN = ''; // Instagram API 토큰 (없으면 폴백)
+    const INSTAGRAM_USERNAME = 'nothingmatters.kr';
+    const MAX_RESULTS = 4; // 2x2 그리드
+    const CACHE_KEY = 'instagram_feed_cache';
+    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간
+
+    const grid = document.getElementById('instagram-grid');
+    if (!grid) return;
+
+    // 캐시 확인
+    try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const data = JSON.parse(cached);
+            const now = new Date().getTime();
+            if (data.timestamp && (now - data.timestamp) < CACHE_DURATION && data.posts && data.posts.length > 0) {
+                console.log('Using cached Instagram data');
+                renderInstagramGrid(data.posts);
+                return;
+            }
+            localStorage.removeItem(CACHE_KEY);
+        }
+    } catch (e) {
+        console.error('Instagram cache error:', e);
+    }
+
+    // API 토큰이 있으면 Instagram Graph API 사용
+    if (INSTAGRAM_ACCESS_TOKEN) {
+        try {
+            grid.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">인스타그램 피드 로딩 중...</div>';
+
+            const apiUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${INSTAGRAM_ACCESS_TOKEN}&limit=${MAX_RESULTS}`;
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) throw new Error(`Instagram API error: ${response.status}`);
+
+            const data = await response.json();
+
+            if (data.data && data.data.length > 0) {
+                const posts = data.data.map(post => ({
+                    img: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
+                    caption: post.caption || '',
+                    link: post.permalink
+                }));
+
+                // 캐시 저장
+                try {
+                    localStorage.setItem(CACHE_KEY, JSON.stringify({
+                        posts: posts,
+                        timestamp: new Date().getTime()
+                    }));
+                } catch (e) { /* ignore */ }
+
+                renderInstagramGrid(posts);
+                return;
+            }
+        } catch (error) {
+            console.error('Instagram API failed:', error);
+        }
+    }
+
+    // 폴백: 토큰 없이 정적 안내 카드 표시
+    renderInstagramFallback();
+}
+
+// Instagram 그리드 렌더링
+function renderInstagramGrid(posts) {
+    const grid = document.getElementById('instagram-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    posts.slice(0, 4).forEach(post => {
+        const item = document.createElement('a');
+        item.className = 'nm-instagram-item';
+        item.href = post.link;
+        item.target = '_blank';
+        item.rel = 'noopener noreferrer';
+
+        const img = document.createElement('img');
+        img.src = post.img;
+        img.alt = post.caption ? post.caption.substring(0, 50) : 'Instagram post';
+        img.loading = 'lazy';
+
+        const overlay = document.createElement('div');
+        overlay.className = 'nm-instagram-overlay';
+        if (post.caption) {
+            overlay.textContent = post.caption.length > 50 ? post.caption.substring(0, 50) + '...' : post.caption;
+        }
+
+        item.appendChild(img);
+        item.appendChild(overlay);
+        grid.appendChild(item);
+    });
+}
+
+// Instagram 폴백 (토큰 없을 때)
+function renderInstagramFallback() {
+    const grid = document.getElementById('instagram-grid');
+    if (!grid) return;
+
+    grid.innerHTML = `
+        <a href="https://www.instagram.com/nothingmatters.kr/" target="_blank" rel="noopener noreferrer" 
+           style="display: flex; align-items: center; gap: 16px; padding: 24px; 
+                  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); 
+                  border-radius: 16px; text-decoration: none; color: inherit;
+                  border: 1px solid #eee; transition: transform 0.2s ease, box-shadow 0.2s ease;"
+           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';"
+           onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+            <div style="font-size: 2.5em;">📷</div>
+            <div>
+                <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 4px;">@nothingmatters.kr</div>
+                <div style="font-size: 0.85em; color: #888; line-height: 1.4;">인스타그램에서 최신 소식을 만나보세요</div>
+            </div>
+        </a>
+    `;
+}
 
 // YouTube Shorts Dynamic Loading
 async function loadYouTubeShorts() {
