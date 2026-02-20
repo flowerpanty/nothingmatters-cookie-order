@@ -165,14 +165,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         `;
                     } else if (renderType === 'grid') {
-                        // Gallery (Grid) - No Title
+                        // Thread-post style
+                        const categoryLabel = container.closest('#section-dessert') ? '🍪 디저트' : '👜 제품';
                         html = `
-                            <div class="nm-gallery-item">
-                                <a href="${post.link}" target="_blank" style="text-decoration:none; color:inherit;">
-                                    <div class="nm-gallery-img" style="background-image: url('${imgUrl}');"></div>
-                                    <!-- Title Removed -->
-                                </a>
-                            </div>
+                            <a href="${post.link}" target="_blank" class="nm-thread-post">
+                                <div class="nm-thread-post-header">
+                                    <img src="images/consult_icon.png" class="nm-thread-avatar" alt="NM">
+                                    <span class="nm-thread-username">nothingmatters</span>
+                                    <span class="nm-thread-badge">${categoryLabel}</span>
+                                </div>
+                                <img src="${imgUrl}" class="nm-thread-post-img" alt="${post.title || ''}" loading="lazy">
+                                ${post.title ? `<div class="nm-thread-post-title">${post.title}</div>` : ''}
+                            </a>
                         `;
                     }
                     container.insertAdjacentHTML('beforeend', html);
@@ -266,7 +270,7 @@ async function loadInstagramFeed() {
     renderInstagramFallback();
 }
 
-// Instagram 그리드 렌더링
+// Instagram 피드 렌더링 (Threads 스타일 세로 피드)
 function renderInstagramGrid(posts) {
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
@@ -274,46 +278,43 @@ function renderInstagramGrid(posts) {
     grid.innerHTML = '';
 
     posts.slice(0, 4).forEach(post => {
-        const item = document.createElement('a');
-        item.className = 'nm-instagram-item';
-        item.href = post.link;
-        item.target = '_blank';
-        item.rel = 'noopener noreferrer';
+        const postEl = document.createElement('a');
+        postEl.className = 'nm-insta-post';
+        postEl.href = post.link;
+        postEl.target = '_blank';
+        postEl.rel = 'noopener noreferrer';
 
-        const img = document.createElement('img');
-        img.src = post.img;
-        img.alt = post.caption ? post.caption.substring(0, 50) : 'Instagram post';
-        img.loading = 'lazy';
+        const captionText = post.caption
+            ? (post.caption.length > 80 ? post.caption.substring(0, 80) + '...' : post.caption)
+            : '';
 
-        const overlay = document.createElement('div');
-        overlay.className = 'nm-instagram-overlay';
-        if (post.caption) {
-            overlay.textContent = post.caption.length > 50 ? post.caption.substring(0, 50) + '...' : post.caption;
-        }
+        postEl.innerHTML = `
+            <div class="nm-insta-post-header">
+                <img src="images/consult_icon.png" class="nm-insta-avatar" alt="NM">
+                <span class="nm-insta-username">nothingnothingn0thing</span>
+            </div>
+            <img src="${post.img}" class="nm-insta-post-img" alt="${captionText || 'Instagram post'}" loading="lazy">
+            ${captionText ? `<div class="nm-insta-caption">${captionText}</div>` : ''}
+        `;
 
-        item.appendChild(img);
-        item.appendChild(overlay);
-        grid.appendChild(item);
+        grid.appendChild(postEl);
     });
 }
 
-// Instagram 폴백 (토큰 없을 때)
+// Instagram 폴백 (API 실패 시)
 function renderInstagramFallback() {
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
 
     grid.innerHTML = `
         <a href="https://www.instagram.com/nothingnothingn0thing/" target="_blank" rel="noopener noreferrer" 
-           style="display: flex; align-items: center; gap: 16px; padding: 24px; 
-                  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); 
-                  border-radius: 16px; text-decoration: none; color: inherit;
-                  border: 1px solid #eee; transition: transform 0.2s ease, box-shadow 0.2s ease;"
-           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';"
-           onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
-            <div style="font-size: 2.5em;">📷</div>
-            <div>
-                <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 4px;">@nothingnothingn0thing</div>
-                <div style="font-size: 0.85em; color: #888; line-height: 1.4;">인스타그램에서 최신 소식을 만나보세요</div>
+           class="nm-insta-post" style="padding: 20px 0;">
+            <div class="nm-insta-post-header">
+                <img src="images/consult_icon.png" class="nm-insta-avatar" alt="NM">
+                <span class="nm-insta-username">nothingnothingn0thing</span>
+            </div>
+            <div style="text-align: center; padding: 40px 0; color: #999; font-size: 0.85rem;">
+                인스타그램에서 최신 소식을 만나보세요 →
             </div>
         </a>
     `;

@@ -1,85 +1,66 @@
 /* 
-   🔥 NUCLEAR CSS OVERRIDES 🔥 
-   #nm-app-root 아이디를 사용하여 워드프레스 테마 스타일을 무시합니다.
+   Threads-Style UI/UX — nothingmatters
+   미니멀 · 가독성 · 쓰레드형 피드
 */
 
+/* ─── Base Reset & Variables ─── */
 #nm-app-root {
-    /* Reset & Variables */
-    --bg-color: #F5F5F7;
-    --card-bg: #FFFFFF;
-    --text-main: #1D1D1F;
-    --text-sub: #444444;
+    --bg: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #999999;
+    --text-tertiary: #CCCCCC;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.15);
+    --accent: #000000;
+    --radius: 12px;
 
-    /* Fonts */
-    --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-    --font-logo: 'Gamja Flower', cursive;
-
-    font-family: var(--font-main) !important;
-    line-height: 1.55 !important;
-    color: #1D1D1F;
-    background-color: #F5F5F7;
-    max-width: 100%;
-    /* User Request: Minimize margins (Full Width) */
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    max-width: 680px;
     margin: 0 auto;
-    padding-bottom: 100px;
-    position: relative;
-    box-sizing: border-box;
-    text-align: left;
-    font-size: 0.88rem !important;
-    /* User Request */
-    font-weight: 400 !important;
-    letter-spacing: -0.2px;
+    padding: 0;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 #nm-app-root * {
     box-sizing: border-box;
-    font-family: var(--font-main) !important;
 }
 
-/* 3. Gallery Grid (Dessert & Product) */
+/* ─── Gallery Grid (shared base) ─── */
 #nm-app-root .nm-gallery-grid {
     display: grid;
-    /* Responsive Grid: Auto-fill with min-width */
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 14px;
-    margin-top: 10px;
+    gap: 2px;
+    margin-top: 0;
 }
 
-/* 🎄 Ribbon Banner */
+/* ─── Announcement Ribbon ─── */
 #nm-app-root .nm-ribbon-wrap {
-    background-color: #1D1D1F !important;
-    color: #F5F5F7 !important;
+    background: #000;
+    color: rgba(255, 255, 255, 0.85);
     overflow: hidden;
-    padding: 12px 0;
-    font-size: 0.85rem;
-    font-weight: 500;
+    padding: 8px 0;
+    font-size: 0.78rem;
+    font-weight: 400;
     white-space: nowrap;
+    letter-spacing: -0.01em;
+}
+
+#nm-app-root .nm-ribbon {
+    overflow: hidden;
     position: relative;
-    z-index: 20;
-}
-
-#nm-app-root .nm-ribbon-item {
-    color: #F5F5F7 !important;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-}
-
-#nm-app-root .nm-ribbon-dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background-color: #86868B;
-    border-radius: 50%;
-    margin-right: 12px;
 }
 
 #nm-app-root .nm-ribbon-inner {
     display: flex;
-    animation: scroll 15s linear infinite;
+    gap: 60px;
+    animation: ribbon-scroll 30s linear infinite;
+    will-change: transform;
 }
 
-@keyframes scroll {
+@keyframes ribbon-scroll {
     0% {
         transform: translateX(0);
     }
@@ -89,88 +70,92 @@
     }
 }
 
-/* Header Title */
-#nm-app-root .nm-header-title {
-    font-family: var(--font-logo) !important;
-    font-size: 1.35rem !important;
-    /* User Request */
-    font-weight: 600 !important;
-    letter-spacing: 0.02em;
-    text-align: center;
-    margin: 40px 0 20px !important;
-    color: #1D1D1F;
+#nm-app-root .nm-ribbon-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
-/* 💊 Filter Pills (Minimal Line Style) */
-#nm-app-root .nm-filter-row-sticky {
-    position: relative;
-    /* User Request: Remove sticky */
-    z-index: 100;
-    background: transparent;
-    padding: 0 20px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
+#nm-app-root .nm-ribbon-dot {
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
 }
 
-/* User Request: Boldest Font */
 .nm-extra-bold {
-    font-family: 'Pretendard', sans-serif !important;
-    font-weight: 900 !important;
-    /* Black/Heavy */
+    font-weight: 600 !important;
 }
 
-/* User Request: Floating Banner (Consultation) */
+/* ─── Floating Buttons ─── */
 #nm-app-root .nm-floating-banner {
     position: fixed;
     bottom: 5px;
-    /* User Request: 5px */
     right: 5px;
-    /* User Request: 5px */
-    z-index: 9999;
-    width: 110px;
-    /* Much bigger */
-    height: 110px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    z-index: 999;
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    transition: transform 0.2s;
 }
 
-/* User Request: Floating Banner (Order) - Positioned above Consult */
+#nm-app-root .nm-floating-banner:hover {
+    transform: scale(1.05);
+}
+
+#nm-app-root .nm-floating-banner img {
+    width: 100%;
+    height: 100%;
+}
+
 #nm-app-root .nm-floating-order {
     position: fixed;
-    bottom: 55px;
-    /* Deep overlap to close visual gap */
-    right: -8px;
-    /* Center align with the banner below */
-    z-index: 9999;
-    width: 135px;
-    /* Increased size */
-    height: 135px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    bottom: 100px;
+    right: 5px;
+    z-index: 999;
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    transition: transform 0.2s;
 }
 
-#nm-app-root .nm-floating-banner:hover,
 #nm-app-root .nm-floating-order:hover {
     transform: scale(1.05);
 }
 
-#nm-app-root .nm-floating-banner img,
 #nm-app-root .nm-floating-order img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+}
+
+/* ─── Header Title ─── */
+#nm-app-root .nm-header-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 20px 0 4px;
+    color: #000;
+}
+
+/* ─── Tab Navigation (Threads-style) ─── */
+#nm-app-root .nm-filter-row-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
 }
 
 #nm-app-root .nm-filter-row {
     display: flex;
-    gap: 8px;
     overflow-x: auto;
-    padding: 0 24px;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding: 0;
 }
 
 #nm-app-root .nm-filter-row::-webkit-scrollbar {
@@ -178,144 +163,124 @@
 }
 
 #nm-app-root .nm-filter-pill {
-    background: #ffffff !important;
-    border: 1.5px solid #000 !important;
-    /* Black Line */
-    color: #000 !important;
-    padding: 6px 14px;
-    border-radius: 50px !important;
-    font-size: 0.8rem !important;
+    flex: 1;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    color: var(--text-secondary) !important;
+    padding: 14px 0 !important;
+    border-radius: 0 !important;
+    font-size: 0.82rem !important;
     font-weight: 500 !important;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.2s ease;
-    box-shadow: none !important;
+    transition: all 0.2s;
+    text-align: center;
+    min-width: 0;
 }
 
 #nm-app-root .nm-filter-pill.active {
-    background: #000 !important;
-    color: #fff !important;
+    color: #000 !important;
+    border-bottom: 2px solid #000 !important;
+    font-weight: 600 !important;
 }
 
-/* Cards */
+/* ─── Content Cards (Thread-style) ─── */
 #nm-app-root .nm-card-list {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    padding: 0 16px;
 }
 
 #nm-app-root .nm-card {
-    background: #FFFFFF;
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-    border: none;
+    padding: 20px 0;
+    border-bottom: 0.5px solid var(--border);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* Card Tag (Minimal Line Style) */
+#nm-app-root .nm-card:last-child {
+    border-bottom: none;
+}
+
 #nm-app-root .nm-card-tag {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center;
-    background: #ffffff !important;
-    border: 1.5px solid #000 !important;
-    color: #000 !important;
-    border-radius: 50px !important;
-    padding: 4px 12px !important;
-    font-size: 0.78rem !important;
-    font-weight: 500 !important;
-    margin-bottom: 14px;
-    gap: 4px !important;
-    box-shadow: none !important;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
 }
 
 #nm-app-root .nm-dot-blue {
-    width: 5px;
-    height: 5px;
-    background-color: #0071E3;
+    width: 6px;
+    height: 6px;
+    background: #000;
     border-radius: 50%;
-    margin-right: 4px;
 }
 
-/* Hero Main Title */
-#nm-app-root .nm-hero-main-title {
-    font-family: 'Pretendard', sans-serif !important;
-    font-weight: 900 !important;
-    font-size: 2.2rem;
-    /* Adjusted for balance */
-    line-height: 1.1;
-    margin-bottom: 12px;
-    color: #1D1D1F;
-    letter-spacing: -1px;
-}
-
-#nm-app-root .nm-hero-sub-ko {
-    font-size: 0.88rem !important;
-    color: #444;
+#nm-app-root .nm-card-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     line-height: 1.55;
+    margin: 0;
     font-weight: 400;
 }
 
-/* Card Text */
-#nm-app-root .nm-card-text {
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
-    line-height: 1.3 !important;
-    color: #444 !important;
-    margin-top: 4px;
-    margin-bottom: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+/* ─── Hero / Brand ─── */
+#nm-app-root .nm-hero-main-title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    color: #000;
+    letter-spacing: -0.03em;
 }
 
-/* Notice Card (Neon Lime + Minimal Layout) */
+#nm-app-root .nm-hero-sub-ko {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ─── Notice Card ─── */
 #nm-app-root .nm-notice-card {
-    background: #BAFF39 !important;
-    /* Neon Lime */
-    border-radius: 26px;
-    padding: 14px 16px 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    color: #111;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    margin: 16px 0 20px;
+    background: transparent;
+    border: 0.5px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin: 12px 0 16px;
 }
 
 #nm-app-root .nm-notice-header {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-    display: block !important;
-    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 #nm-app-root .nm-notice-pill {
-    background: #111 !important;
+    background: #000 !important;
     color: #fff !important;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    display: inline-flex !important;
+    display: inline-flex;
     margin-bottom: 6px;
     border: none;
 }
 
 #nm-app-root .nm-notice-body {
-    width: 100% !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    width: 100%;
+    margin-top: 0;
 }
 
-/* KBoard Notice List Overrides */
+/* KBoard Notice Overrides */
 #nm-app-root .nm-notice-body table {
     width: 100% !important;
     display: block !important;
     border-collapse: collapse !important;
-    border-spacing: 0 !important;
-    margin-top: 0 !important;
     border: none !important;
 }
 
@@ -342,154 +307,20 @@
     background: transparent !important;
     text-align: left !important;
     font-size: 0.8rem !important;
-    font-weight: 500 !important;
-    color: #111 !important;
-    line-height: 1.25 !important;
+    font-weight: 400 !important;
+    color: #000 !important;
 }
 
 #nm-app-root .nm-notice-body td a {
     display: block !important;
     text-decoration: none !important;
-    color: #111 !important;
+    color: #000 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
 }
 
-/* KBoard Gallery (2-Column Grid + Reels Ratio) */
-#nm-app-root .kboard-pure-gallery-list {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 14px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-#nm-app-root .kboard-pure-gallery-list .kboard-list-item {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    border-radius: 18px !important;
-    overflow: hidden !important;
-}
-
-#nm-app-root .kboard-pure-gallery-list .kboard-list-thumbnail {
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-}
-
-/* 썸네일 비율 (140% padding-top for Reels style) */
-#nm-app-root .kboard-pure-gallery-list .kboard-list-thumbnail-child {
-    width: 100% !important;
-    padding-top: 140% !important;
-    border-radius: 18px !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    display: block !important;
-}
-
-/* 갤러리 텍스트 숨기기 (이미지만) */
-#nm-app-root .kboard-pure-gallery-list .kboard-list-title,
-#nm-app-root .kboard-pure-gallery-list .kboard-list-user,
-#nm-app-root .kboard-pure-gallery-list .kboard-list-date,
-#nm-app-root .kboard-pure-gallery-list .kboard-list-view {
-    display: none !important;
-}
-
-/* Choice Card */
-#nm-app-root .nm-card-choice {
-    text-align: center;
-}
-
-#nm-app-root .nm-card-title-choice {
-    font-family: 'Pretendard', sans-serif !important;
-    font-weight: 800 !important;
-    font-size: 1.5rem !important;
-    margin-bottom: 12px;
-    color: #1D1D1F;
-}
-
-#nm-app-root .nm-card-text-choice {
-    font-size: 0.88rem !important;
-    margin-bottom: 30px;
-    color: #86868B;
-    white-space: normal !important;
-    /* Allow wrap for this text */
-}
-
-#nm-app-root .nm-btn-choice-main {
-    background: white;
-    color: #1D1D1F;
-    border: 1px solid #1D1D1F;
-    padding: 14px 28px;
-    font-size: 0.86rem !important;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#nm-app-root .nm-btn-choice-ghost {
-    background: transparent;
-    border: 1px solid #E5E5E5;
-    color: #1D1D1F;
-    padding: 14px 28px;
-    font-size: 0.86rem !important;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-
-/* Big Order Button */
-#nm-app-root .nm-big-cta-container {
-    padding: 20px 24px 80px;
-    text-align: center;
-}
-
-#nm-app-root .nm-big-cta-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    background: white;
-    border: 3px solid #000;
-    border-radius: 50px;
-    padding: 18px;
-    text-decoration: none;
-    color: #000;
-    font-size: 1.2rem;
-    font-weight: 800;
-    box-shadow: 6px 6px 0px #3B82F6;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-#nm-app-root .nm-big-cta-btn:hover {
-    top: 2px;
-    left: 2px;
-    box-shadow: 4px 4px 0px #3B82F6;
-    transition: all 0.2s ease;
-}
-
-#nm-app-root .nm-footer {
-    text-align: center;
-    margin-top: 40px;
-    color: #86868B;
-    font-size: 0.75rem;
-}
-
-/* ------------------------------------------------------------------
-   REPLACEMENT STYLES FOR WORDPRESS SHORTCODES
-   ------------------------------------------------------------------ */
-
-/* 1. Notice List */
+/* ─── Notice List (API-driven) ─── */
 #nm-app-root .nm-notice-list {
     list-style: none;
     padding: 0;
@@ -498,9 +329,9 @@
 }
 
 #nm-app-root .nm-notice-list li {
-    margin-bottom: 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 8px;
+    margin-bottom: 6px;
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 6px;
 }
 
 #nm-app-root .nm-notice-list li:last-child {
@@ -514,9 +345,9 @@
     justify-content: space-between;
     align-items: center;
     text-decoration: none;
-    color: #111;
+    color: #000;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 #nm-app-root .nm-notice-title {
@@ -529,367 +360,125 @@
 
 #nm-app-root .nm-notice-date {
     font-size: 0.75rem;
-    color: #555;
+    color: var(--text-secondary);
     white-space: nowrap;
 }
 
-/* 2. Journal Slider */
-#nm-app-root .nm-journal-slider-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    /* Firefox */
-    margin-top: 10px;
-    scroll-snap-type: x mandatory;
-}
-
-#nm-app-root .nm-journal-slider-container::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari, Opera */
-}
-
-#nm-app-root .nm-journal-track {
-    display: flex;
-    gap: 16px;
-    padding-bottom: 10px;
-    /* Space for shadow if needed */
-    width: max-content;
-}
-
-#nm-app-root .nm-journal-item {
-    width: 220px;
-    /* Increased width */
-    flex-shrink: 0;
-    background: #fff;
-    border-radius: 12px;
-    /* Slightly smaller radius */
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    scroll-snap-align: start;
-}
-
-#nm-app-root .nm-journal-img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    /* Wider portrait ratio (instead of 9/16) */
-    height: auto;
-    background-size: cover;
-    background-position: center;
-}
-
-#nm-app-root .nm-journal-info {
-    padding: 8px;
-    /* Reduced padding */
-}
-
-#nm-app-root .nm-journal-title {
-    font-size: 0.8rem;
-    /* Smaller title */
-    font-weight: 600;
-    color: #1D1D1F;
-    margin-bottom: 0;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-#nm-app-root .nm-journal-desc {
-    font-size: 0.8rem;
-    color: #86868B;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* 3. Gallery Grid (Dessert & Product) */
-#nm-app-root .nm-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 10px;
-}
-
-#nm-app-root .nm-gallery-item {
-    background: transparent;
-    border-radius: 18px;
-    overflow: hidden;
-    position: relative;
-}
-
-#nm-app-root .nm-gallery-img {
-    width: 100%;
-    padding-top: 100%;
-    /* 1:1 Aspect Ratio */
-    background-size: cover;
-    background-position: center;
-    border-radius: 18px;
-    margin-bottom: 8px;
-}
-
-#nm-app-root .nm-gallery-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #1D1D1F;
-    text-align: center;
-}
-
-#nm-app-root .nm-gallery-footer {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#nm-app-root .nm-btn-small {
-    display: inline-block;
-    padding: 8px 20px;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: background 0.2s;
-}
-
-#nm-app-root .nm-btn-small:hover {
-    background: #e5e5e7;
-}
-
-/* 🆕 Mid CTA Button (Below Notice) */
+/* ─── Mid CTA Button ─── */
 #nm-app-root .nm-mid-cta-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #1D1D1F;
-    /* Black Background */
-    border: 2px solid #1D1D1F;
-    border-radius: 24px;
-    padding: 24px 28px;
-    margin-bottom: 10px;
-    /* Space before next card */
+    background: #000;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin: 0 0 8px;
     text-decoration: none;
-    color: #FFFFFF;
-    /* White Text */
-    box-shadow: 4px 4px 0px #0071E3;
-    /* Vibrant Blue Shadow */
-    /* Pop Shadow */
-    transition: all 0.2s ease;
-    position: relative;
-    top: 0;
-    left: 0;
+    color: #fff;
+    transition: opacity 0.2s;
 }
 
 #nm-app-root .nm-mid-cta-btn:hover {
-    top: 2px;
-    left: 2px;
-    box-shadow: 2px 2px 0px #0071E3;
-    background-color: #000000;
-    /* Darker Black on Hover */
+    opacity: 0.85;
 }
 
 #nm-app-root .nm-mid-cta-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 #nm-app-root .nm-mid-cta-main {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #FFFFFF;
-    /* White */
-    line-height: 1.3;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.35;
 }
 
 #nm-app-root .nm-mid-cta-sub {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 400;
-    color: #CCCCCC;
-    /* Light Gray */
+    color: rgba(255, 255, 255, 0.6);
 }
 
 #nm-app-root .nm-mid-cta-icon {
-    font-size: 1.5rem;
-    margin-left: 16px;
-}
-
-/* 🎄 Christmas CTA Button */
-#nm-app-root .nm-christmas-cta-btn {
-    display: block;
-    position: relative;
-    border-radius: 24px;
-    padding: 0;
-    margin-bottom: 10px;
-    text-decoration: none;
-    overflow: hidden;
-    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
-    transition: all 0.3s ease;
-}
-
-#nm-app-root .nm-christmas-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #DC2626 0%, #16A34A 100%);
-    opacity: 1;
-    z-index: 0;
-}
-
-#nm-app-root .nm-christmas-cta-btn::before {
-    content: '❄️';
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    font-size: 1.5rem;
-    opacity: 0.3;
-    animation: snow-fall 3s infinite ease-in-out;
-    z-index: 1;
-}
-
-#nm-app-root .nm-christmas-cta-btn::after {
-    content: '⭐';
-    position: absolute;
-    top: 20%;
-    right: 15%;
     font-size: 1.2rem;
-    opacity: 0.4;
-    animation: twinkle 2s infinite ease-in-out;
-    z-index: 1;
+    margin-left: 12px;
 }
 
-@keyframes snow-fall {
-
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
+/* ─── Instagram Feed (Thread-post style) ─── */
+#nm-app-root .nm-instagram-grid {
+    margin-top: 12px;
 }
 
-@keyframes twinkle {
-
-    0%,
-    100% {
-        opacity: 0.4;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: scale(1.2);
-    }
+#nm-app-root .nm-insta-post {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
 }
 
-#nm-app-root .nm-christmas-content {
-    position: relative;
-    z-index: 2;
+#nm-app-root .nm-insta-post:last-child {
+    border-bottom: none;
+}
+
+#nm-app-root .nm-insta-post-header {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 24px 28px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-#nm-app-root .nm-christmas-emoji {
-    font-size: 2rem;
-    line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+#nm-app-root .nm-insta-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.5px solid var(--border);
 }
 
-#nm-app-root .nm-christmas-text {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
+#nm-app-root .nm-insta-username {
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
-#nm-app-root .nm-christmas-main {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #FFFFFF;
-    line-height: 1.3;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+#nm-app-root .nm-insta-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-left: auto;
 }
 
-#nm-app-root .nm-christmas-sub {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-#nm-app-root .nm-christmas-cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(220, 38, 38, 0.35);
-}
-
-#nm-app-root .nm-christmas-cta-btn:hover .nm-christmas-bg {
-    opacity: 0.95;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 400px) {
-    #nm-app-root .nm-mid-cta-btn {
-        padding: 20px;
-    }
-
-    #nm-app-root .nm-mid-cta-main {
-        font-size: 1rem;
-    }
-
-    #nm-app-root .nm-mid-cta-sub {
-        font-size: 0.85rem;
-    }
-
-    #nm-app-root .nm-christmas-content {
-        padding: 20px;
-        gap: 12px;
-    }
-
-    #nm-app-root .nm-christmas-emoji {
-        font-size: 1.6rem;
-    }
-
-    #nm-app-root .nm-christmas-main {
-        font-size: 1rem;
-    }
-
-    #nm-app-root .nm-christmas-sub {
-        font-size: 0.85rem;
-    }
-}
-
-/* 📷 Instagram Feed Section */
-#nm-app-root .nm-instagram-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 16px;
-}
-
-#nm-app-root .nm-instagram-item {
-    position: relative;
-    aspect-ratio: 1;
-    border-radius: 18px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+#nm-app-root .nm-insta-post-img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
     background: #f5f5f5;
 }
 
-#nm-app-root .nm-instagram-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+#nm-app-root .nm-insta-caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Fallback (old 2x2 grid compat) */
+#nm-app-root .nm-instagram-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f5f5f5;
 }
 
 #nm-app-root .nm-instagram-item img {
@@ -904,12 +493,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
     color: white;
-    padding: 12px;
+    padding: 10px;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    font-size: 0.75rem;
+    transition: opacity 0.2s;
+    font-size: 0.72rem;
     line-height: 1.3;
 }
 
@@ -917,39 +506,30 @@
     opacity: 1;
 }
 
-#nm-app-root .nm-instagram-loading {
-    text-align: center;
-    padding: 40px 20px;
-    color: #999;
-    grid-column: 1 / -1;
-}
-
-/* 📱 YouTube Shorts Section */
+/* ─── YouTube Shorts ─── */
 #nm-app-root .nm-shorts-wrapper {
     position: relative;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 #nm-app-root .nm-shorts-container {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 #nm-app-root .nm-shorts-item {
-    flex: 0 0 calc(50% - 8px);
+    flex: 0 0 calc(50% - 6px);
     max-width: 280px;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: #000;
+    transition: transform 0.2s;
 }
 
 #nm-app-root .nm-shorts-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 #nm-app-root .nm-shorts-item iframe {
@@ -959,7 +539,6 @@
     display: block;
 }
 
-/* 슬라이더 네비게이션 버튼 (모바일 전용) */
 #nm-app-root .nm-shorts-nav {
     display: none;
 }
@@ -971,32 +550,22 @@
     background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     z-index: 10;
-    transition: all 0.2s ease;
-}
-
-#nm-app-root .nm-shorts-nav-btn:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: translateY(-50%) scale(1.1);
-}
-
-#nm-app-root .nm-shorts-nav-btn:active {
-    transform: translateY(-50%) scale(0.95);
 }
 
 #nm-app-root .nm-shorts-nav-prev {
-    left: -10px;
+    left: -8px;
 }
 
 #nm-app-root .nm-shorts-nav-next {
-    right: -10px;
+    right: -8px;
 }
 
 #nm-app-root .nm-shorts-nav-btn:disabled {
@@ -1004,36 +573,420 @@
     cursor: not-allowed;
 }
 
-/* 인디케이터 dots */
 #nm-app-root .nm-shorts-dots {
     display: none;
     justify-content: center;
-    gap: 8px;
-    margin-top: 12px;
+    gap: 6px;
+    margin-top: 10px;
 }
 
 #nm-app-root .nm-shorts-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: #ddd;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
 }
 
 #nm-app-root .nm-shorts-dot.active {
-    background: #0071E3;
-    width: 24px;
-    border-radius: 4px;
+    background: #000;
+    width: 18px;
+    border-radius: 3px;
 }
 
-/* Mobile: 슬라이더 형식 */
+/* ─── Journal Slider ─── */
+#nm-app-root .nm-journal-slider-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-top: 12px;
+    scroll-snap-type: x mandatory;
+}
+
+#nm-app-root .nm-journal-slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+#nm-app-root .nm-journal-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+}
+
+#nm-app-root .nm-journal-item {
+    width: 200px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+    scroll-snap-align: start;
+    transition: transform 0.2s;
+}
+
+#nm-app-root .nm-journal-item:hover {
+    transform: translateY(-2px);
+}
+
+#nm-app-root .nm-journal-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+#nm-app-root .nm-journal-info {
+    padding: 8px 10px;
+}
+
+#nm-app-root .nm-journal-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ─── Gallery (Dessert & Product — Thread-post style) ─── */
+#nm-app-root .nm-thread-feed {
+    margin-top: 12px;
+}
+
+#nm-app-root .nm-thread-post {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--border);
+}
+
+#nm-app-root .nm-thread-post:last-child {
+    border-bottom: none;
+}
+
+#nm-app-root .nm-thread-post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#nm-app-root .nm-thread-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
+#nm-app-root .nm-thread-username {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #000;
+}
+
+#nm-app-root .nm-thread-badge {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-left: auto;
+}
+
+#nm-app-root .nm-thread-post-img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: #f5f5f5;
+}
+
+#nm-app-root .nm-thread-post-title {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: #000;
+}
+
+#nm-app-root .nm-thread-post-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+/* ─── Gallery Item (simple grid fallback) ─── */
+#nm-app-root .nm-gallery-item {
+    background: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+#nm-app-root .nm-gallery-img {
+    width: 100%;
+    padding-top: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+#nm-app-root .nm-gallery-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
+    margin-top: 6px;
+}
+
+#nm-app-root .nm-gallery-footer {
+    margin-top: 16px;
+    text-align: center;
+}
+
+#nm-app-root .nm-btn-small {
+    display: inline-block;
+    padding: 8px 20px;
+    background: transparent;
+    color: #000;
+    border: 0.5px solid var(--border-strong);
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+#nm-app-root .nm-btn-small:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* ─── KBoard Gallery Overrides ─── */
+#nm-app-root .kboard-pure-gallery-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#nm-app-root .kboard-pure-gallery-list .kboard-list-item {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+}
+
+#nm-app-root .kboard-pure-gallery-list .kboard-list-thumbnail {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+#nm-app-root .kboard-pure-gallery-list .kboard-list-thumbnail-child {
+    width: 100% !important;
+    padding-top: 100% !important;
+    border-radius: 0 !important;
+    background-size: cover !important;
+    background-position: center !important;
+    display: block !important;
+}
+
+#nm-app-root .kboard-pure-gallery-list .kboard-list-title,
+#nm-app-root .kboard-pure-gallery-list .kboard-list-user,
+#nm-app-root .kboard-pure-gallery-list .kboard-list-date,
+#nm-app-root .kboard-pure-gallery-list .kboard-list-view {
+    display: none !important;
+}
+
+/* ─── Choice Card ─── */
+#nm-app-root .nm-card-choice {
+    text-align: center;
+    padding: 40px 0;
+}
+
+#nm-app-root .nm-card-title-choice {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #000;
+    letter-spacing: -0.02em;
+}
+
+#nm-app-root .nm-card-text-choice {
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+#nm-app-root .nm-btn-choice-main {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    font-size: 0.85rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    transition: opacity 0.2s;
+}
+
+#nm-app-root .nm-btn-choice-main:hover {
+    opacity: 0.8;
+}
+
+#nm-app-root .nm-btn-choice-ghost {
+    background: transparent;
+    border: 0.5px solid var(--border-strong);
+    color: #000;
+    padding: 14px 28px;
+    font-size: 0.85rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+}
+
+#nm-app-root .nm-btn-choice-ghost:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* ─── Footer ─── */
+#nm-app-root .nm-footer {
+    text-align: center;
+    padding: 30px 0 40px;
+    color: var(--text-tertiary);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+}
+
+/* ─── Christmas CTA (kept minimal) ─── */
+#nm-app-root .nm-christmas-cta-btn {
+    display: block;
+    border-radius: var(--radius);
+    padding: 0;
+    margin-bottom: 8px;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+#nm-app-root .nm-christmas-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #DC2626 0%, #16A34A 100%);
+    z-index: 0;
+}
+
+#nm-app-root .nm-christmas-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+}
+
+#nm-app-root .nm-christmas-emoji {
+    font-size: 1.6rem;
+}
+
+#nm-app-root .nm-christmas-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+#nm-app-root .nm-christmas-main {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+#nm-app-root .nm-christmas-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Big CTA (if used) */
+#nm-app-root .nm-big-cta-container {
+    padding: 20px 0 60px;
+    text-align: center;
+}
+
+#nm-app-root .nm-big-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #000;
+    border: none;
+    border-radius: 100px;
+    padding: 16px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+#nm-app-root .nm-big-cta-btn:hover {
+    opacity: 0.85;
+}
+
+/* Dessert/Product gallery wrappers */
+#nm-app-root .nm-dessert-gallery,
+#nm-app-root .nm-product-gallery {
+    margin-top: 12px;
+}
+
+/* Thread-feed override: vertical column layout */
+#nm-app-root .nm-thread-feed.nm-gallery-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ─── Mobile Responsive ─── */
 @media (max-width: 600px) {
+    #nm-app-root {
+        padding: 0;
+    }
+
+    #nm-app-root .nm-card-list {
+        padding: 0 16px;
+    }
+
+    #nm-app-root .nm-mid-cta-btn {
+        padding: 16px;
+    }
+
+    #nm-app-root .nm-mid-cta-main {
+        font-size: 0.9rem;
+    }
+
     #nm-app-root .nm-shorts-wrapper {
         overflow: hidden;
-        /* 다음 슬라이드가 보이지 않도록 */
-        padding: 0 20px;
-        /* 좌우 여백 */
+        padding: 0;
     }
 
     #nm-app-root .nm-shorts-container {
@@ -1043,34 +996,44 @@
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        /* Firefox */
-        gap: 16px;
-        /* 아이템 간격 */
+        gap: 12px;
         padding: 0;
-        /* 컨테이너 패딩 제거 */
     }
 
     #nm-app-root .nm-shorts-container::-webkit-scrollbar {
         display: none;
-        /* Chrome, Safari */
     }
 
     #nm-app-root .nm-shorts-item {
-        flex: 0 0 calc(100% - 40px);
-        /* wrapper 패딩 고려 */
-        width: calc(100% - 40px);
+        flex: 0 0 85%;
         max-width: 100%;
-        scroll-snap-align: start;
-        /* start로 변경하여 정확한 정렬 */
+        scroll-snap-align: center;
     }
 
-    /* 모바일에서 네비게이션 버튼 표시 */
     #nm-app-root .nm-shorts-nav {
         display: block;
     }
 
-    /* 모바일에서 인디케이터 표시 */
     #nm-app-root .nm-shorts-dots {
         display: flex;
+    }
+
+    /* Thread posts responsive */
+    #nm-app-root .nm-thread-post-img {
+        border-radius: 8px;
+    }
+
+    #nm-app-root .nm-insta-post-img {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    #nm-app-root .nm-mid-cta-main {
+        font-size: 0.85rem;
+    }
+
+    #nm-app-root .nm-christmas-content {
+        padding: 16px;
     }
 }
