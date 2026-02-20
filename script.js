@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Instagram Feed Loading (Behold.so JSON Feed)
 async function loadInstagramFeed() {
     const BEHOLD_FEED_URL = 'https://feeds.behold.so/A3XXWSoyBYtxDU7Te9T7';
-    const MAX_RESULTS = 4; // 2x2 그리드
+    const MAX_RESULTS = 2; // 2개 포스트
     const CACHE_KEY = 'instagram_feed_cache';
     const CACHE_DURATION = 60 * 60 * 1000; // 1시간
 
