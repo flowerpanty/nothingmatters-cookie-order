@@ -516,16 +516,26 @@
     display: flex;
     gap: 12px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+#nm-app-root .nm-shorts-container::-webkit-scrollbar {
+    display: none;
 }
 
 #nm-app-root .nm-shorts-item {
-    flex: 0 0 calc(50% - 6px);
-    max-width: 280px;
+    flex: 0 0 80%;
+    max-width: 320px;
     border-radius: 10px;
     overflow: hidden;
     background: #000;
     transition: transform 0.2s;
+    scroll-snap-align: center;
 }
 
 #nm-app-root .nm-shorts-item:hover {
@@ -540,7 +550,7 @@
 }
 
 #nm-app-root .nm-shorts-nav {
-    display: none;
+    display: block;
 }
 
 #nm-app-root .nm-shorts-nav-btn {
@@ -574,7 +584,7 @@
 }
 
 #nm-app-root .nm-shorts-dots {
-    display: none;
+    display: flex;
     justify-content: center;
     gap: 6px;
     margin-top: 10px;
@@ -982,40 +992,6 @@
 
     #nm-app-root .nm-mid-cta-main {
         font-size: 0.9rem;
-    }
-
-    #nm-app-root .nm-shorts-wrapper {
-        overflow: hidden;
-        padding: 0;
-    }
-
-    #nm-app-root .nm-shorts-container {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 12px;
-        padding: 0;
-    }
-
-    #nm-app-root .nm-shorts-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    #nm-app-root .nm-shorts-item {
-        flex: 0 0 85%;
-        max-width: 100%;
-        scroll-snap-align: center;
-    }
-
-    #nm-app-root .nm-shorts-nav {
-        display: block;
-    }
-
-    #nm-app-root .nm-shorts-dots {
-        display: flex;
     }
 
     /* Thread posts responsive */
