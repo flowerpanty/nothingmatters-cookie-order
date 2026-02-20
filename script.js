@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadInstagramFeed() {
     const BEHOLD_FEED_URL = 'https://feeds.behold.so/A3XXWSoyBYtxDU7Te9T7';
     const MAX_RESULTS = 2; // 2개 포스트
-    const CACHE_KEY = 'instagram_feed_cache';
+    const CACHE_KEY = 'instagram_feed_cache_v2';
     const CACHE_DURATION = 60 * 60 * 1000; // 1시간
 
     const grid = document.getElementById('instagram-grid');
@@ -278,7 +278,7 @@ function renderInstagramGrid(posts) {
 
     grid.innerHTML = '';
 
-    posts.slice(0, 4).forEach(post => {
+    posts.slice(0, 2).forEach(post => {
         const postEl = document.createElement('a');
         postEl.className = 'nm-insta-post';
         postEl.href = post.link;
