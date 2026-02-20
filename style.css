@@ -626,7 +626,8 @@
 }
 
 #nm-app-root .nm-journal-item {
-    width: 200px;
+    width: 45%;
+    min-width: 200px;
     flex-shrink: 0;
     background: #fff;
     border-radius: 10px;
