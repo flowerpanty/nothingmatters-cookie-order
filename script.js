@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Fetch Content (Mixed Sources)
-    const WP_API_BASE = 'https://betterbetters.co.kr/wp-json/wp/v2/posts?_embed&per_page=6';
+    const WP_API_BASE = 'https://betterbetters.co.kr/wp-json/wp/v2/posts?_embed&per_page=2';
     const KBOARD_API_BASE = 'https://betterbetters.co.kr/wp-json/kboard/v1/list';
 
     // Helper to fetch and render
@@ -133,9 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (posts.length > 0) {
-                container.innerHTML = ''; // Clear placeholders
+                const maxPosts = (renderType === 'grid') ? 2 : posts.length;
+                container.innerHTML = '';
 
-                posts.forEach(post => {
+                posts.slice(0, maxPosts).forEach(post => {
                     // Default image if missing
                     const imgUrl = post.img ? post.img : 'https://via.placeholder.com/300x300?text=No+Image';
 
