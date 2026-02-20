@@ -91,11 +91,11 @@
 /* ─── Floating Buttons ─── */
 #nm-app-root .nm-floating-banner {
     position: fixed;
-    bottom: 12px;
-    right: 12px;
+    bottom: 2px;
+    right: 2px;
     z-index: 999;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
     transition: transform 0.2s;
 }
@@ -111,11 +111,11 @@
 
 #nm-app-root .nm-floating-order {
     position: fixed;
-    bottom: 78px;
-    right: 12px;
+    bottom: 88px;
+    right: 2px;
     z-index: 999;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
     transition: transform 0.2s;
 }
