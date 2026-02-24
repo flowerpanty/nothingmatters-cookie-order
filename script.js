@@ -308,7 +308,7 @@ function renderInstagramFallback() {
     if (!grid) return;
 
     grid.innerHTML = `
-        <a href="https://www.instagram.com/nothingnothingn0thing/" target="_blank" rel="noopener noreferrer" 
+        <a href="https://www.instagram.com/nothiingworks/" target="_blank" rel="noopener noreferrer" 
            class="nm-insta-post" style="padding: 20px 0;">
             <div class="nm-insta-post-header">
                 <img src="images/consult_icon.png" class="nm-insta-avatar" alt="NM">
