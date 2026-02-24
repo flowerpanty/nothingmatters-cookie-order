@@ -292,7 +292,7 @@ function renderInstagramGrid(posts) {
         postEl.innerHTML = `
             <div class="nm-insta-post-header">
                 <img src="images/consult_icon.png" class="nm-insta-avatar" alt="NM">
-                <span class="nm-insta-username">nothingnothingn0thing</span>
+                <span class="nm-insta-username">nothiingworks</span>
             </div>
             <img src="${post.img}" class="nm-insta-post-img" alt="${captionText || 'Instagram post'}" loading="lazy">
             ${captionText ? `<div class="nm-insta-caption">${captionText}</div>` : ''}
@@ -312,7 +312,7 @@ function renderInstagramFallback() {
            class="nm-insta-post" style="padding: 20px 0;">
             <div class="nm-insta-post-header">
                 <img src="images/consult_icon.png" class="nm-insta-avatar" alt="NM">
-                <span class="nm-insta-username">nothingnothingn0thing</span>
+                <span class="nm-insta-username">nothiingworks</span>
             </div>
             <div style="text-align: center; padding: 40px 0; color: #999; font-size: 0.85rem;">
                 인스타그램에서 최신 소식을 만나보세요 →
