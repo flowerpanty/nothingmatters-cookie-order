@@ -331,7 +331,7 @@ async function loadYouTubeShorts() {
     const CHANNEL_ID = 'UC2Wtgd70UrGZ3ousmrHL-Qg'; // bettermatters 채널 ID
     const MAX_RESULTS = 2;
     const CACHE_KEY = 'youtube_shorts_cache';
-    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간 (밀리초)
+    const CACHE_DURATION = 60 * 60 * 1000; // 1시간 (밀리초)
 
     const container = document.getElementById('shorts-container');
     if (!container) return;
