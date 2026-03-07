@@ -209,13 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Instagram Feed Loading
+// Instagram Feed Loading (Behold.so JSON Feed)
 async function loadInstagramFeed() {
-    const INSTAGRAM_ACCESS_TOKEN = ''; // Instagram API 토큰 (없으면 폴백)
-    const INSTAGRAM_USERNAME = 'nothiingworks';
+    const BEHOLD_FEED_URL = 'https://feeds.behold.so/A3XXWSoyBYtxDU7Te9T7';
     const MAX_RESULTS = 4; // 2x2 그리드
-    const CACHE_KEY = 'instagram_feed_cache_v2';
-    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간
+    const CACHE_KEY = 'instagram_feed_cache_v3';
+    const CACHE_DURATION = 60 * 60 * 1000; // 1시간
 
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
@@ -237,42 +236,38 @@ async function loadInstagramFeed() {
         console.error('Instagram cache error:', e);
     }
 
-    // API 토큰이 있으면 Instagram Graph API 사용
-    if (INSTAGRAM_ACCESS_TOKEN) {
-        try {
-            grid.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">인스타그램 피드 로딩 중...</div>';
+    // Behold.so JSON Feed 호출
+    try {
+        grid.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">인스타그램 피드 로딩 중...</div>';
 
-            const apiUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${INSTAGRAM_ACCESS_TOKEN}&limit=${MAX_RESULTS}`;
-            const response = await fetch(apiUrl);
+        const response = await fetch(BEHOLD_FEED_URL);
+        if (!response.ok) throw new Error(`Behold API error: ${response.status}`);
 
-            if (!response.ok) throw new Error(`Instagram API error: ${response.status}`);
+        const data = await response.json();
 
-            const data = await response.json();
+        if (data.posts && data.posts.length > 0) {
+            const posts = data.posts.slice(0, MAX_RESULTS).map(post => ({
+                img: post.sizes && post.sizes.medium ? post.sizes.medium.mediaUrl : post.mediaUrl,
+                caption: post.prunedCaption || post.caption || '',
+                link: post.permalink
+            }));
 
-            if (data.data && data.data.length > 0) {
-                const posts = data.data.map(post => ({
-                    img: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-                    caption: post.caption || '',
-                    link: post.permalink
+            // 캐시 저장
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify({
+                    posts: posts,
+                    timestamp: new Date().getTime()
                 }));
+            } catch (e) { /* ignore */ }
 
-                // 캐시 저장
-                try {
-                    localStorage.setItem(CACHE_KEY, JSON.stringify({
-                        posts: posts,
-                        timestamp: new Date().getTime()
-                    }));
-                } catch (e) { /* ignore */ }
-
-                renderInstagramGrid(posts);
-                return;
-            }
-        } catch (error) {
-            console.error('Instagram API failed:', error);
+            renderInstagramGrid(posts);
+            return;
         }
+    } catch (error) {
+        console.error('Instagram feed failed:', error);
     }
 
-    // 폴백: 토큰 없이 정적 안내 카드 표시
+    // 폴백: API 실패 시 정적 안내 카드 표시
     renderInstagramFallback();
 }
 
