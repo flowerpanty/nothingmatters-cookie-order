@@ -209,11 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Instagram Feed Loading (Behold.so JSON Feed)
+// Instagram Feed Loading (Behold.so JSON Feed — 스레드 스타일)
 async function loadInstagramFeed() {
-    const BEHOLD_FEED_URL = 'https://feeds.behold.so/A3XXWSoyBYtxDU7Te9T7';
-    const MAX_RESULTS = 4; // 2x2 그리드
-    const CACHE_KEY = 'instagram_feed_cache_v3';
+    const BEHOLD_FEED_URL = 'https://feeds.behold.so/mrLllGhpRMcngwzT6rmS';
+    const MAX_RESULTS = 4;
+    const CACHE_KEY = 'instagram_feed_cache_v4';
     const CACHE_DURATION = 60 * 60 * 1000; // 1시간
 
     const grid = document.getElementById('instagram-grid');
@@ -227,7 +227,7 @@ async function loadInstagramFeed() {
             const now = new Date().getTime();
             if (data.timestamp && (now - data.timestamp) < CACHE_DURATION && data.posts && data.posts.length > 0) {
                 console.log('Using cached Instagram data');
-                renderInstagramGrid(data.posts);
+                renderInstagramThread(data.posts, data.profilePic);
                 return;
             }
             localStorage.removeItem(CACHE_KEY);
@@ -246,75 +246,81 @@ async function loadInstagramFeed() {
         const data = await response.json();
 
         if (data.posts && data.posts.length > 0) {
+            const profilePic = data.profilePictureUrl || '';
             const posts = data.posts.slice(0, MAX_RESULTS).map(post => ({
                 img: post.sizes && post.sizes.medium ? post.sizes.medium.mediaUrl : post.mediaUrl,
                 caption: post.prunedCaption || post.caption || '',
-                link: post.permalink
+                link: post.permalink,
+                timestamp: post.timestamp || ''
             }));
 
             // 캐시 저장
             try {
                 localStorage.setItem(CACHE_KEY, JSON.stringify({
                     posts: posts,
+                    profilePic: profilePic,
                     timestamp: new Date().getTime()
                 }));
             } catch (e) { /* ignore */ }
 
-            renderInstagramGrid(posts);
+            renderInstagramThread(posts, profilePic);
             return;
         }
     } catch (error) {
         console.error('Instagram feed failed:', error);
     }
 
-    // 폴백: API 실패 시 정적 안내 카드 표시
     renderInstagramFallback();
 }
 
-// Instagram 그리드 렌더링
-function renderInstagramGrid(posts) {
+// Instagram 스레드 스타일 렌더링 (1개씩 세로로)
+function renderInstagramThread(posts, profilePic) {
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
 
     grid.innerHTML = '';
 
-    posts.slice(0, 4).forEach(post => {
-        const item = document.createElement('a');
-        item.className = 'nm-instagram-item';
-        item.href = post.link;
-        item.target = '_blank';
-        item.rel = 'noopener noreferrer';
-
-        const img = document.createElement('img');
-        img.src = post.img;
-        img.alt = post.caption ? post.caption.substring(0, 50) : 'Instagram post';
-        img.loading = 'lazy';
-
-        const overlay = document.createElement('div');
-        overlay.className = 'nm-instagram-overlay';
-        if (post.caption) {
-            overlay.textContent = post.caption.length > 50 ? post.caption.substring(0, 50) + '...' : post.caption;
+    posts.forEach(post => {
+        // 시간 포맷
+        let timeAgo = '';
+        if (post.timestamp) {
+            const diff = Date.now() - new Date(post.timestamp).getTime();
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            if (days === 0) timeAgo = '오늘';
+            else if (days === 1) timeAgo = '어제';
+            else if (days < 7) timeAgo = days + '일 전';
+            else if (days < 30) timeAgo = Math.floor(days / 7) + '주 전';
+            else timeAgo = Math.floor(days / 30) + '개월 전';
         }
 
-        item.appendChild(img);
-        item.appendChild(overlay);
-        grid.appendChild(item);
+        const postEl = document.createElement('a');
+        postEl.className = 'nm-insta-post';
+        postEl.href = post.link;
+        postEl.target = '_blank';
+        postEl.rel = 'noopener noreferrer';
+
+        postEl.innerHTML = `
+            <div class="nm-insta-post-header">
+                <img src="${profilePic || 'images/consult_icon.png'}" class="nm-insta-avatar" alt="nothiingworks">
+                <span class="nm-insta-username">nothiingworks</span>
+                <span class="nm-insta-time">${timeAgo}</span>
+            </div>
+            <img src="${post.img}" class="nm-insta-post-img" alt="${post.caption ? post.caption.substring(0, 50) : 'Instagram post'}" loading="lazy">
+            ${post.caption ? `<div class="nm-insta-caption">${post.caption}</div>` : ''}
+        `;
+
+        grid.appendChild(postEl);
     });
 }
 
-// Instagram 폴백 (토큰 없을 때)
+// Instagram 폴백
 function renderInstagramFallback() {
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
 
     grid.innerHTML = `
         <a href="https://www.instagram.com/nothiingworks/" target="_blank" rel="noopener noreferrer" 
-           style="display: flex; align-items: center; gap: 16px; padding: 24px; 
-                  background: #fff; 
-                  border-radius: 12px; text-decoration: none; color: inherit;
-                  border: 0.5px solid rgba(0,0,0,0.15); transition: transform 0.2s ease;"
-           onmouseover="this.style.transform='translateY(-2px)';"
-           onmouseout="this.style.transform='none';">
+           class="nm-insta-post" style="display: flex; align-items: center; gap: 16px; padding: 24px;">
             <div style="font-size: 2.5em;">📷</div>
             <div>
                 <div style="font-weight: 600; font-size: 1.05em; margin-bottom: 4px;">@nothiingworks</div>

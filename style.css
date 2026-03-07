@@ -507,12 +507,9 @@
     opacity: 1;
 }
 
-/* ─── Instagram 2x2 Grid (self-implemented) ─── */
+/* ─── Instagram Feed (Thread-post style) ─── */
 #nm-app-root .nm-instagram-grid {
     margin-top: 12px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
 }
 
 /* ─── YouTube Shorts ─── */
