@@ -507,41 +507,12 @@
     opacity: 1;
 }
 
-/* ─── Instaplug Widget Overrides (match homepage style) ─── */
-#nm-app-root .nm-instagram-grid #0279da98-e284-49f6-b950-fa2a127a9199 {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif !important;
-    color: #000 !important;
-}
-
-/* Override Instaplug internal styles to match thread-style */
-#nm-app-root .nm-instagram-grid [class*="instaplug"],
-#nm-app-root .nm-instagram-grid iframe {
-    border: none !important;
-    border-radius: 10px !important;
-    max-width: 100% !important;
-}
-
-/* Grid images: match our rounded corners */
-#nm-app-root .nm-instagram-grid img {
-    border-radius: 10px !important;
-    object-fit: cover !important;
-}
-
-/* Remove any heavy shadows or backgrounds from the widget */
-#nm-app-root .nm-instagram-grid>div {
-    background: transparent !important;
-    box-shadow: none !important;
-}
-
-/* Ensure the widget respects our max-width */
-#nm-app-root .nm-instagram-grid * {
-    font-family: inherit !important;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* Hide Instaplug branding if present */
-#nm-app-root .nm-instagram-grid a[href*="instaplug"] {
-    display: none !important;
+/* ─── Instagram 2x2 Grid (self-implemented) ─── */
+#nm-app-root .nm-instagram-grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
 }
 
 /* ─── YouTube Shorts ─── */
