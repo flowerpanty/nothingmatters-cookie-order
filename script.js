@@ -599,10 +599,7 @@ async function loadGhostBlog() {
 
                 postEl.innerHTML = `
                     <a href="${post.url}" target="_blank" style="text-decoration:none; color:inherit;">
-                        <div class="nm-journal-img" style="background-image: url('${imgUrl}');"></div>
-                        <div class="nm-journal-info">
-                            <div class="nm-journal-title">${post.title}</div>
-                        </div>
+                        <div class="nm-ghost-img" style="background-image: url('${imgUrl}');"></div>
                     </a>
                 `;
 

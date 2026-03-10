@@ -1146,3 +1146,11 @@
         padding-top: 100%;
     }
 }
+/* Ghost Blog Specific Image Styling (Uncropped) */
+#nm-app-root .nm-ghost-img {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Or auto, but a fixed ratio is good for sliders. 16:9 is standard for blogs */
+    height: auto;
+    background-size: cover; /* Cover still crops, but less if it's 16:9. Let's use 16:9 to avoid heavy left/right crop */
+    background-position: center;
+}
