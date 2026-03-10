@@ -580,45 +580,32 @@ async function loadGhostBlog() {
 
     try {
         const response = await fetch(`${GHOST_API_URL}/ghost/api/content/posts/?key=${GHOST_API_KEY}&limit=3&include=tags,authors`);
-        
+
         if (!response.ok) {
             throw new Error(`Ghost API error: ${response.status}`);
         }
 
         const data = await response.json();
-        
+
         if (data.posts && data.posts.length > 0) {
             grid.innerHTML = ''; // Clear loading text
 
             data.posts.forEach(post => {
-                const date = new Date(post.published_at);
-                const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
-                
                 // Use feature image or fallback to a default image
                 const imgUrl = post.feature_image ? post.feature_image : 'images/consult_icon.png';
-                const tagLabel = post.primary_tag ? post.primary_tag.name : 'Blog';
 
-                const postEl = document.createElement('a');
-                postEl.className = 'nm-blog-post';
-                postEl.href = post.url;
-                postEl.target = '_blank';
-                postEl.rel = 'noopener noreferrer';
+                const postEl = document.createElement('div');
+                postEl.className = 'nm-journal-item';
 
                 postEl.innerHTML = `
-                    <div class="nm-blog-post-img-wrap">
-                        <img src="${imgUrl}" class="nm-blog-post-img" alt="${post.title}" loading="lazy">
-                        <span class="nm-blog-post-tag">${tagLabel}</span>
-                    </div>
-                    <div class="nm-blog-post-content">
-                        <div class="nm-blog-post-title">${post.title}</div>
-                        <div class="nm-blog-post-excerpt">${post.custom_excerpt || post.excerpt.substring(0, 80) + '...'}</div>
-                        <div class="nm-blog-post-meta">
-                            <span class="nm-blog-post-author">${post.primary_author ? post.primary_author.name : 'nothingmatters'}</span>
-                            <span class="nm-blog-post-date">${formattedDate}</span>
+                    <a href="${post.url}" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="nm-journal-img" style="background-image: url('${imgUrl}');"></div>
+                        <div class="nm-journal-info">
+                            <div class="nm-journal-title">${post.title}</div>
                         </div>
-                    </div>
+                    </a>
                 `;
-                
+
                 grid.appendChild(postEl);
             });
         } else {
