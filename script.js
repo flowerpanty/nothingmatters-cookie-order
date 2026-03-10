@@ -570,3 +570,72 @@ function cacheShorts(videos) {
         console.error('Error saving to cache:', error);
     }
 }
+
+// Ghost Blog API Fetching
+async function loadGhostBlog() {
+    const GHOST_API_URL = 'https://blog.nothingmatters.co.kr';
+    const GHOST_API_KEY = '28c88bc80587105e1cbc6d84c3';
+    const grid = document.getElementById('ghost-blog-grid');
+    if (!grid) return;
+
+    try {
+        const response = await fetch(`${GHOST_API_URL}/ghost/api/content/posts/?key=${GHOST_API_KEY}&limit=3&include=tags,authors`);
+        
+        if (!response.ok) {
+            throw new Error(`Ghost API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.posts && data.posts.length > 0) {
+            grid.innerHTML = ''; // Clear loading text
+
+            data.posts.forEach(post => {
+                const date = new Date(post.published_at);
+                const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                
+                // Use feature image or fallback to a default image
+                const imgUrl = post.feature_image ? post.feature_image : 'images/consult_icon.png';
+                const tagLabel = post.primary_tag ? post.primary_tag.name : 'Blog';
+
+                const postEl = document.createElement('a');
+                postEl.className = 'nm-blog-post';
+                postEl.href = post.url;
+                postEl.target = '_blank';
+                postEl.rel = 'noopener noreferrer';
+
+                postEl.innerHTML = `
+                    <div class="nm-blog-post-img-wrap">
+                        <img src="${imgUrl}" class="nm-blog-post-img" alt="${post.title}" loading="lazy">
+                        <span class="nm-blog-post-tag">${tagLabel}</span>
+                    </div>
+                    <div class="nm-blog-post-content">
+                        <div class="nm-blog-post-title">${post.title}</div>
+                        <div class="nm-blog-post-excerpt">${post.custom_excerpt || post.excerpt.substring(0, 80) + '...'}</div>
+                        <div class="nm-blog-post-meta">
+                            <span class="nm-blog-post-author">${post.primary_author ? post.primary_author.name : 'nothingmatters'}</span>
+                            <span class="nm-blog-post-date">${formattedDate}</span>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(postEl);
+            });
+        } else {
+            grid.innerHTML = '<div style="text-align: center; padding: 20px; color: #666; font-size: 0.85em;">아직 작성된 블로그 글이 없습니다.</div>';
+        }
+    } catch (error) {
+        console.error('Failed to load Ghost Blog:', error);
+        grid.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <p style="color: #666; font-size: 0.85em; margin-bottom: 12px;">블로그 글을 잠시 불러오지 못했습니다.</p>
+                <a href="https://blog.nothingmatters.co.kr" target="_blank" class="nm-btn nm-btn-small">블로그 직접 가기</a>
+            </div>
+        `;
+    }
+}
+
+// Ensure it runs after DOM content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    try { loadGhostBlog(); } catch (e) { console.error('Ghost Blog load error:', e); }
+});
