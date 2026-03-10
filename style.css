@@ -1020,6 +1020,7 @@
         padding: 16px;
     }
 }
+
 /* -------------------------------------------------------------------------- */
 /* GHOST BLOG GRID STYLES */
 /* -------------------------------------------------------------------------- */
@@ -1046,13 +1047,14 @@
 
 #nm-app-root .nm-blog-post:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 #nm-app-root .nm-blog-post-img-wrap {
     position: relative;
     width: 100%;
-    padding-top: 65%; /* roughly 3:2 ratio */
+    padding-top: 100%;
+    /* 1:1 ratio for Instagram feed look */
     background: #f8f8f8;
     overflow: hidden;
 }
@@ -1126,7 +1128,7 @@
     font-size: 0.75rem;
     color: #999;
     padding-top: 10px;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 #nm-app-root .nm-blog-post-author {
@@ -1139,7 +1141,8 @@
     #nm-app-root .nm-blog-grid {
         grid-template-columns: 1fr;
     }
+
     #nm-app-root .nm-blog-post-img-wrap {
-        padding-top: 55%; 
+        padding-top: 100%;
     }
 }
