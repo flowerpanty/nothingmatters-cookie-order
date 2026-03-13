@@ -114,12 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data && Array.isArray(data)) {
                     posts = data.map(post => {
                         let imgUrl = post.img;
-                        // Fix for file_download.php URL if present
-                        if (imgUrl && imgUrl.includes('file_download.php') && imgUrl.includes('file=/')) {
-                            const fileParam = imgUrl.split('file=')[1];
-                            if (fileParam.startsWith('/')) {
-                                imgUrl = 'https://betterbetters.co.kr' + fileParam;
+                        // Fix for file_download.php URL — extract direct file path
+                        // file_download.php redirects to homepage instead of serving images,
+                        // so we use the direct file path from the 'file=' parameter
+                        if (imgUrl && imgUrl.includes('file_download.php') && imgUrl.includes('file=')) {
+                            const fileMatch = imgUrl.match(/file=([^&]+)/);
+                            if (fileMatch && fileMatch[1]) {
+                                const filePath = decodeURIComponent(fileMatch[1]);
+                                imgUrl = 'https://blog.nothingmatters.co.kr' + filePath;
                             }
+                        }
+                        // Also fix any remaining betterbetters.co.kr direct URLs
+                        if (imgUrl && imgUrl.includes('betterbetters.co.kr')) {
+                            imgUrl = imgUrl.replace('https://betterbetters.co.kr', 'https://blog.nothingmatters.co.kr');
                         }
 
                         return {
