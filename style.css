@@ -140,6 +140,19 @@
     margin: 0;
 }
 
+#nm-app-root .nm-site-header {
+    padding: 22px 16px 12px;
+    text-align: center;
+}
+
+#nm-app-root .nm-header-subtitle {
+    margin: 6px auto 0;
+    max-width: 560px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
 /* ─── Tab Navigation (Threads-style) ─── */
 #nm-app-root .nm-filter-row-sticky {
     position: sticky;
@@ -244,6 +257,21 @@
     line-height: 1.6;
     margin: 0;
     font-weight: 400;
+}
+
+#nm-app-root .nm-hero-note {
+    font-size: 0.85em;
+    color: #666;
+    display: block;
+    margin-top: 6px;
+}
+
+#nm-app-root .nm-section-title {
+    font-size: 1.1rem;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+    color: #000;
 }
 
 /* ─── Notice Card ─── */
@@ -406,6 +434,129 @@
 #nm-app-root .nm-mid-cta-icon {
     font-size: 1.2rem;
     margin-left: 12px;
+}
+
+#nm-app-root .nm-search-hub {
+    padding-top: 22px;
+}
+
+#nm-app-root .nm-resource-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+#nm-app-root .nm-resource-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    text-decoration: none;
+    color: #111;
+    background: #fafafa;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+#nm-app-root .nm-resource-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.16);
+    background: #fff;
+}
+
+#nm-app-root .nm-resource-card strong {
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+#nm-app-root .nm-resource-card span:last-child {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.45;
+}
+
+#nm-app-root .nm-resource-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #555;
+    text-transform: uppercase;
+}
+
+#nm-app-root .nm-summary-stack {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+#nm-app-root .nm-summary-item {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    padding: 14px;
+    background: #fafafa;
+}
+
+#nm-app-root .nm-summary-item h3 {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+}
+
+#nm-app-root .nm-summary-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.55;
+}
+
+#nm-app-root .nm-faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+#nm-app-root .nm-faq-item {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    background: #fafafa;
+}
+
+#nm-app-root .nm-faq-item h3 {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+#nm-app-root .nm-faq-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.55;
+}
+
+#nm-app-root .nm-inline-links,
+#nm-app-root .nm-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin-top: 14px;
+}
+
+#nm-app-root .nm-inline-links a,
+#nm-app-root .nm-footer-links a {
+    color: #111;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+#nm-app-root .nm-noscript-copy {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 12px 0 0;
+    line-height: 1.5;
 }
 
 /* ─── Instagram Feed (Thread-post style) ─── */
@@ -1153,4 +1304,186 @@
     height: auto;
     background-size: cover; /* Cover still crops, but less if it's 16:9. Let's use 16:9 to avoid heavy left/right crop */
     background-position: center;
+}
+
+body.nm-page-body {
+    margin: 0;
+    background: #fff;
+    color: #111;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+}
+
+.nm-kicker {
+    margin: 0 0 10px;
+    color: #666;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.nm-subpage-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 20px 72px;
+}
+
+.nm-subpage-topbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.nm-back-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.nm-subpage-title {
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.nm-lead {
+    margin: 14px 0 0;
+    max-width: 680px;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.nm-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 0;
+}
+
+.nm-content-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #f3f3f3;
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.nm-prose-section {
+    margin-top: 30px;
+}
+
+.nm-prose-section h2,
+.nm-note-card h2 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+}
+
+.nm-prose-section p,
+.nm-note-card p {
+    margin: 0 0 12px;
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.98rem;
+}
+
+.nm-prose-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.nm-prose-list li + li {
+    margin-top: 6px;
+}
+
+.nm-note-card {
+    margin-top: 30px;
+    padding: 18px;
+    border-radius: 18px;
+    background: #f7f7f7;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nm-cta-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.nm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #111;
+    transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.nm-btn:hover {
+    opacity: 0.88;
+}
+
+.nm-btn-choice-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: transparent;
+    color: #111;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nm-btn-choice-ghost:hover {
+    background: #111;
+    color: #fff;
+}
+
+#nm-app-root .nm-footer-copy {
+    font-size: 0.76em;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    #nm-app-root .nm-resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nm-subpage-shell {
+        padding: 22px 16px 56px;
+    }
+
+    .nm-subpage-topbar {
+        align-items: flex-start;
+    }
+
+    .nm-lead,
+    .nm-prose-section p,
+    .nm-note-card p {
+        font-size: 0.95rem;
+    }
 }

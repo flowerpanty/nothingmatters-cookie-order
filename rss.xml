@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nothingmatters (낫띵메터스)</title>
+    <link>https://nothingworks.co.kr/</link>
+    <description>낫띵메터스의 브랜드 소개, 수제쿠키, 답례품 쿠키, 미니가방 안내 피드</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Tue, 07 Apr 2026 10:30:00 +0900</lastBuildDate>
+    <atom:link href="https://nothingworks.co.kr/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>낫띵메터스 메인 페이지</title>
+      <link>https://nothingworks.co.kr/</link>
+      <guid>https://nothingworks.co.kr/</guid>
+      <pubDate>Tue, 07 Apr 2026 10:30:00 +0900</pubDate>
+      <description>낫띵메터스의 브랜드 소개, 작업일지, 디저트와 제품, 주문 FAQ를 모은 메인 페이지</description>
+    </item>
+
+    <item>
+      <title>수제쿠키와 브루키 주문 안내</title>
+      <link>https://nothingworks.co.kr/cookies.html</link>
+      <guid>https://nothingworks.co.kr/cookies.html</guid>
+      <pubDate>Tue, 07 Apr 2026 10:30:00 +0900</pubDate>
+      <description>수제쿠키와 브루키를 찾는 분을 위한 낫띵메터스 디저트 안내 페이지</description>
+    </item>
+
+    <item>
+      <title>답례품 쿠키와 단체주문 안내</title>
+      <link>https://nothingworks.co.kr/gifts.html</link>
+      <guid>https://nothingworks.co.kr/gifts.html</guid>
+      <pubDate>Tue, 07 Apr 2026 10:30:00 +0900</pubDate>
+      <description>답례품 쿠키, 기업 답례품, 웨딩 쿠키를 찾는 분을 위한 상담 안내 페이지</description>
+    </item>
+
+    <item>
+      <title>미니가방과 감성 소품 안내</title>
+      <link>https://nothingworks.co.kr/bags.html</link>
+      <guid>https://nothingworks.co.kr/bags.html</guid>
+      <pubDate>Tue, 07 Apr 2026 10:30:00 +0900</pubDate>
+      <description>미니가방, 캔버스백, 감성 소품을 찾는 분을 위한 카테고리 안내 페이지</description>
+    </item>
+
+    <item>
+      <title>브랜드 소개와 주문 FAQ</title>
+      <link>https://nothingworks.co.kr/brand-faq.html</link>
+      <guid>https://nothingworks.co.kr/brand-faq.html</guid>
+      <pubDate>Tue, 07 Apr 2026 10:30:00 +0900</pubDate>
+      <description>브랜드 소개, 주문 경로, 카테고리별 FAQ를 모아둔 페이지</description>
+    </item>
+  </channel>
+</rss>

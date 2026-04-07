@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 posts.slice(0, maxPosts).forEach(post => {
                     // Default image if missing
-                    const imgUrl = post.img ? post.img : 'https://via.placeholder.com/300x300?text=No+Image';
+                    const imgUrl = post.img ? post.img : 'images/order_icon.png';
 
                     let html = '';
 
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Keep title for Notice
                         html = `
                             <li>
-                                <a href="${post.link}" target="_blank">
+                                <a href="${post.link}" target="_blank" rel="noopener noreferrer">
                                     <span class="nm-notice-title">${post.title}</span>
                                     <span class="nm-notice-date">${post.date}</span>
                                 </a>
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Work Log (Slider) - Show Title, Square Image
                         html = `
                             <div class="nm-journal-item">
-                                <a href="${post.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                                <a href="${post.link}" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit;">
                                     <div class="nm-journal-img" style="background-image: url('${imgUrl}');"></div>
                                     <div class="nm-journal-info">
                                         <div class="nm-journal-title">${post.title}</div>
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Thread-post style
                         const categoryLabel = container.closest('#section-dessert') ? '🍪 디저트' : '👜 제품';
                         html = `
-                            <a href="${post.link}" target="_blank" class="nm-thread-post">
+                            <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="nm-thread-post">
                                 <div class="nm-thread-post-header">
                                     <img src="images/consult_icon.png" class="nm-thread-avatar" alt="NM">
                                     <span class="nm-thread-username">nothingmatters</span>
@@ -605,7 +605,7 @@ async function loadGhostBlog() {
                 postEl.className = 'nm-journal-item';
 
                 postEl.innerHTML = `
-                    <a href="${post.url}" target="_blank" style="text-decoration:none; color:inherit;">
+                    <a href="${post.url}" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit;">
                         <div class="nm-ghost-img" style="background-image: url('${imgUrl}');"></div>
                     </a>
                 `;
@@ -620,7 +620,7 @@ async function loadGhostBlog() {
         grid.innerHTML = `
             <div style="text-align: center; padding: 20px;">
                 <p style="color: #666; font-size: 0.85em; margin-bottom: 12px;">블로그 글을 잠시 불러오지 못했습니다.</p>
-                <a href="https://blog.nothingmatters.co.kr" target="_blank" class="nm-btn nm-btn-small">블로그 직접 가기</a>
+                <a href="https://blog.nothingmatters.co.kr" target="_blank" rel="noopener noreferrer" class="nm-btn nm-btn-small">블로그 직접 가기</a>
             </div>
         `;
     }

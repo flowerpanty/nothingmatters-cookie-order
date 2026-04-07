@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nothingmatters.co.kr/sitemap.xml
+User-agent: Yeti
+Allow: /
+
+Sitemap: https://nothingworks.co.kr/sitemap.xml
